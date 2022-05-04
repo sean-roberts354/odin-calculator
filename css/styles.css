@@ -72,3 +72,44 @@ select {
     scroll-behavior: auto !important;
   }
 }
+
+:root {
+      --clr-dark: 34, 40, 49;
+      --clr-light: 221, 221, 221;
+      --clr-accent1: 240, 84, 84;
+      --clr-accent2: 48, 71, 94;
+}
+
+body {
+      font-family: 'Montserrat', sans-serif;
+      color: rgb(var(--clr-light));
+      background-color: rgb(var(--clr-light));
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+}
+
+header {
+      background-color: rgb(var(--clr-dark));
+      text-align: center;
+      padding: 2rem;
+      width: 100vw;
+}
+
+footer {
+      background-color: rgb(var(--clr-dark));
+      text-align: center;
+      padding: 1rem;
+      width: 100vw;
+}
+
+footer a {
+      text-decoration: none;
+      color: inherit;
+}
+
+.frame {
+      background-color: rgb(var(--clr-dark));
+}
