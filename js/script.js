@@ -96,32 +96,30 @@ function handleClick(type, value) {
                   } else {
                         i++;
                         expression[i] = createInputObject(type, value);
-                        console.log(type);
-                        console.log(value);
                         updateDisplay(type, value);
                         i++;
                         previousInput = "operator";
                         break;
                   }
             case "function":
-                  if (previousInput == "operator" || previousInput == "function") {
-                        alert("You must enter a second number")
-                        break;
-                  }
                   if (value == "calculate") {
-                        calculateExpression();
-                        previousInput = "function"
-                        break;
+                        if (previousInput == "operator") {
+                              alert("You must enter a second number")
+                              break;
+                        } else {
+                              calculateExpression();
+                              previousInput = "function"
+                              break;
+                        }
                   } else if (value == "clear") {
                         resetCalculator("clear");
+                        break;
                   }
       }
 }
 
 function updateDisplay(type, ...value) {
       let display = document.querySelector(".display");
-      console.log(type);
-      console.log(value);
       switch (type) {
             case "integer":
                   value.forEach((item) => {
@@ -183,12 +181,14 @@ function calculateExpression() {
 
 function resetCalculator(type) {
       if (type == "new") {
-            history.push(document.querySelector(".display").textContent);
+            history.push(document.querySelector(".display").innerText);
+            console.log(history);
             expression = [];
             expression[0] = createInputObject("integer");
             i = 0;
             updateDisplay("reset");
       } else if (type == "clear") {
+            console.log(history);
             expression = [];
             expression[0] = createInputObject("integer");
             i = 0;
