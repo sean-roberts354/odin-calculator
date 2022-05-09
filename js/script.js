@@ -182,13 +182,11 @@ function calculateExpression() {
 function resetCalculator(type) {
       if (type == "new") {
             history.push(document.querySelector(".display").innerText);
-            console.log(history);
             expression = [];
             expression[0] = createInputObject("integer");
             i = 0;
             updateDisplay("reset");
       } else if (type == "clear") {
-            console.log(history);
             expression = [];
             expression[0] = createInputObject("integer");
             i = 0;
@@ -203,19 +201,3 @@ document.querySelectorAll("button").forEach((button) => {
             handleClick(e.target.dataset.type, e.target.dataset.value);
       })
 })
-
-
-
-/* 
-
-First, think of a way to store expression
-
-1. Take input from page
-2. Determine type of input (i.e. Integer, Operator, function)
-      1. If integer add value to array/object
-            Note: Decimal is considered an integer so there needs to be a way to check if there's already a decimal in the expression
-      2. If operator, finish previous expressoin and add operator type to array/object
-      3. If function, parse array/object to function and evaluate
-            Note: If last item was operator, prevent function from evaluating
-
-*/
