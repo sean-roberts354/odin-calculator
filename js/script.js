@@ -59,11 +59,28 @@ function handleClick(type, value) {
                               break;
                         } else {
                               expression[i].input.push(value);
+                              previousInput = "integer";
                               break;
                         }
                   }
+            case "operator":
+                  if (i == 2) {
+                        alert("This is not a very smart calculator and can only perform operations on two numbers right now.")
+                        break;
+                  }
+                  if (previousInput == "operator") {
+                        alert("You can not have two operators in a row");
+                        break;
+                  } else {
+                        i++;
+                        expression[i] = createInputObject(type, value);
+                        i++;
+                        previousInput = "operator";
+                        break;
+                  }
       }
       console.log(expression);
+      console.log(previousInput);
 }
 
 
