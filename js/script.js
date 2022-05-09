@@ -32,11 +32,13 @@ function handleClick(type, value) {
                               if (expression[i].input.length == 0) {
                                     expression[i].input.push("0");
                                     expression[i].input.push(value);
+                                    updateDisplay(type, "0", value);
                                     previousInput = "integer";
                                     expression[i].hasDecimal = true;
                                     break;
                               } else {
                                     expression[i].input.push(value);
+                                    updateDisplay(type, value);
                                     previousInput = "integer";
                                     expression[i].hasDecimal = true;
                                     break;
@@ -46,6 +48,7 @@ function handleClick(type, value) {
                               break;
                         } else if (value != ".") {
                               expression[i].input.push(value);
+                              updateDisplay(type, value);
                               previousInput = "integer";
                               break;
                         }
@@ -54,14 +57,18 @@ function handleClick(type, value) {
                         if (value == ".") {
                               expression[i].input.push("0");
                               expression[i].input.push(value);
+                              updateDisplay(type, "0", value);
                               previousInput = "integer";
                               expression[i].hasDecimal = true;
                               break;
                         } else {
                               expression[i].input.push(value);
+                              updateDisplay(type, value);
                               previousInput = "integer";
                               break;
                         }
+                  } else if (previousInput == "function") {
+                        updateDisplay("reset");
                   }
             case "operator":
                   if (i == 2) {
@@ -74,6 +81,9 @@ function handleClick(type, value) {
                   } else {
                         i++;
                         expression[i] = createInputObject(type, value);
+                        console.log(type);
+                        console.log(value);
+                        updateDisplay(type, value);
                         i++;
                         previousInput = "operator";
                         break;
@@ -85,8 +95,44 @@ function handleClick(type, value) {
                   }
                   if (value == "calculate") {
                         calculateExpression();
+                        previousInput = "function"
                         break;
                   } 
+      }
+}
+
+function updateDisplay(type, ...value) {
+      let display = document.querySelector(".display");
+      console.log(type);
+      console.log(value);
+      switch (type) {
+            case "integer":
+                  value.forEach((item) => {
+                        display.textContent = display.textContent.concat(item);
+                  })
+                  break;
+            case "operator":
+                  switch (value[0]) {
+                        case "divide":
+                              display.textContent = display.textContent.concat([" / "]);
+                              break;
+                        case "multiply":
+                              display.textContent = display.textContent.concat([" x "]);
+                              break;
+                        case "subtract":
+                              display.textContent = display.textContent.concat([" - "]);
+                              break;
+                        case "add":
+                              display.textContent = display.textContent.concat([" + "]);
+                              break;
+                  }
+            case "function":
+                  if (value[0] == "calculate") {
+                        display.textContent = display.textContent.concat([` = ${value[1]}`])
+                  }
+                  break;
+            case "reset":
+                  display.textContent = "";
       }
 }
 
@@ -115,6 +161,7 @@ function calculateExpression() {
                   break;
       }
 
+      updateDisplay("function", "calculate", answer);
       console.log(answer);
 }
 
