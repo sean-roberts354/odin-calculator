@@ -24,6 +24,8 @@ expression[0] = createInputObject("integer")
 let previousInput = "integer";
 let i = 0;
 
+let history = new Array();
+
 function handleClick(type, value) {
       switch (type) {
             case "integer":
@@ -68,7 +70,20 @@ function handleClick(type, value) {
                               break;
                         }
                   } else if (previousInput == "function") {
-                        updateDisplay("reset");
+                        resetCalculator("new");
+                        if (value == ".") {
+                              expression[i].input.push("0");
+                              expression[i].input.push(value);
+                              updateDisplay(type, "0", value);
+                              previousInput = "integer";
+                              expression[i].hasDecimal = true;
+                              break;
+                        } else {
+                              expression[i].input.push(value);
+                              updateDisplay(type, value);
+                              previousInput = "integer";
+                              break;
+                        }
                   }
             case "operator":
                   if (i == 2) {
@@ -88,7 +103,7 @@ function handleClick(type, value) {
                         previousInput = "operator";
                         break;
                   }
-            case "function":      
+            case "function":
                   if (previousInput == "operator" || previousInput == "function") {
                         alert("You must enter a second number")
                         break;
@@ -97,7 +112,9 @@ function handleClick(type, value) {
                         calculateExpression();
                         previousInput = "function"
                         break;
-                  } 
+                  } else if (value == "clear") {
+                        resetCalculator("clear");
+                  }
       }
 }
 
@@ -162,7 +179,21 @@ function calculateExpression() {
       }
 
       updateDisplay("function", "calculate", answer);
-      console.log(answer);
+}
+
+function resetCalculator(type) {
+      if (type == "new") {
+            history.push(document.querySelector(".display").textContent);
+            expression = [];
+            expression[0] = createInputObject("integer");
+            i = 0;
+            updateDisplay("reset");
+      } else if (type == "clear") {
+            expression = [];
+            expression[0] = createInputObject("integer");
+            i = 0;
+            updateDisplay("reset");
+      }
 }
 
 
