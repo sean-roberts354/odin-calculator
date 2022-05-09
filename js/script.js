@@ -78,10 +78,15 @@ function handleClick(type, value) {
                         previousInput = "operator";
                         break;
                   }
-            case "function":
+            case "function":      
+                  if (previousInput == "operator" || previousInput == "function") {
+                        alert("You must enter a second number")
+                        break;
+                  }
                   if (value == "calculate") {
                         calculateExpression();
-                  }
+                        break;
+                  } 
       }
 }
 
