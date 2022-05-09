@@ -140,10 +140,19 @@ div.display {
       color: rgb(var(--clr-dark));
       border-radius: 0px;
       background-color: rgb(var(--clr-light));
+      flex-direction: column;
+      gap: 0.5rem;
       justify-content: flex-end;
       align-items: flex-end;
       cursor: default;
 }
+
+div.history {
+      font-size: 1rem;
+      overflow-y: auto;
+      padding-right: 5px;
+}
+
 
 button.backspace {
       grid-area: 3 / 1 / span 1 / span 1;

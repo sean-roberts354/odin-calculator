@@ -119,7 +119,7 @@ function handleClick(type, value) {
 }
 
 function updateDisplay(type, ...value) {
-      let display = document.querySelector(".display");
+      let display = document.querySelector(".output");
       switch (type) {
             case "integer":
                   value.forEach((item) => {
@@ -181,7 +181,8 @@ function calculateExpression() {
 
 function resetCalculator(type) {
       if (type == "new") {
-            history.push(document.querySelector(".display").innerText);
+            history.push(document.querySelector(".output").innerText);
+            document.querySelector(".history").innerHTML += `${history[history.length - 1]} <br />`;
             expression = [];
             expression[0] = createInputObject("integer");
             i = 0;
