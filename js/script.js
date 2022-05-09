@@ -78,10 +78,41 @@ function handleClick(type, value) {
                         previousInput = "operator";
                         break;
                   }
+            case "function":
+                  if (value == "calculate") {
+                        calculateExpression();
+                  }
       }
-      console.log(expression);
-      console.log(previousInput);
 }
+
+function calculateExpression() {
+      let num1 = parseFloat(expression[0].input.join(""));
+      let operator = expression[1].value;
+      let num2 = parseFloat(expression[2].input.join(""));
+      let answer;
+
+      switch (operator) {
+            case "divide":
+                  if (num2 == 0) {
+                        alert("Can not divide by 0")
+                  } else {
+                        answer = num1 / num2;
+                  }
+                  break;
+            case "multiply":
+                  answer = num1 * num2;
+                  break;
+            case "subtract":
+                  answer = num1 - num2;
+                  break;
+            case "add":
+                  answer = num1 + num2;
+                  break;
+      }
+
+      console.log(answer);
+}
+
 
 
 document.querySelectorAll("button").forEach((button) => {
